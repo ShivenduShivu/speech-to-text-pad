@@ -1,4 +1,5 @@
 // script.js - Speech-to-Text Pad using Web Speech API (SpeechRecognition)
+// Adds smart punctuation + basic sentence capitalization.
 
 document.addEventListener("DOMContentLoaded", () => {
   const SpeechRecognition =
@@ -15,10 +16,56 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorArea = document.getElementById("errorArea");
   const notesList = document.getElementById("notesList");
   const noteCount = document.getElementById("noteCount");
+  const hintLabel = document.getElementById("hintLabel");
 
   let recognition = null;
   let isListening = false;
-  let finalText = ""; // accumulated final transcript
+  let finalText = ""; // accumulated "cleaned" transcript
+
+  // Update hint to show voice punctuation help
+  if (hintLabel) {
+    hintLabel.textContent = 'Tip: say "comma", "period", "question mark", or "new line" for punctuation.';
+  }
+
+  // ---- smart formatting ----
+  function smartFormat(text) {
+    if (!text) return "";
+
+    let t = text;
+
+    // Replace voice punctuation words by symbols
+    const subs = [
+      { re: /\bcomma\b/gi, to: "," },
+      { re: /\bperiod\b|\bfull stop\b/gi, to: "." },
+      { re: /\bquestion mark\b/gi, to: "?" },
+      { re: /\bexclamation (?:mark|point)\b/gi, to: "!" },
+      { re: /\bnew line\b|\bnewline\b/gi, to: "\n" }
+    ];
+
+    subs.forEach(({ re, to }) => {
+      t = t.replace(re, to);
+    });
+
+    // Remove extra spaces before punctuation: "word ," -> "word,"
+    t = t.replace(/[ \t]+([,\.!?])/g, "$1");
+
+    // Ensure space after punctuation if followed by a word (not newline)
+    t = t.replace(/([,\.!?])([^\s\n])/g, "$1 $2");
+
+    // Trim spaces around each line
+    t = t
+      .split("\n")
+      .map((line) => line.trim())
+      .join("\n");
+
+    // Capitalize the first letter of each sentence
+    // e.g. "hello. how are you?" -> "Hello. How are you?"
+    t = t.replace(/(^|[\.\!\?]\s+)([a-z])/g, (match, prefix, letter) => {
+      return prefix + letter.toUpperCase();
+    });
+
+    return t.trim();
+  }
 
   // ---- check support ----
   if (!SpeechRecognition) {
@@ -48,6 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
   recognition.onend = () => {
     isListening = false;
     updateMicUI();
+    // When it ends, clean up the final text once more
+    finalText = smartFormat(textOutput.value);
+    textOutput.value = finalText;
   };
 
   recognition.onerror = (event) => {
@@ -57,19 +107,29 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   recognition.onresult = (event) => {
-    let interim = "";
+    let interimRaw = "";
     for (let i = event.resultIndex; i < event.results.length; i++) {
       const res = event.results[i];
       if (res.isFinal) {
-        finalText += (finalText ? " " : "") + res[0].transcript.trim();
+        const piece = res[0].transcript.trim();
+        finalText = finalText
+          ? finalText + " " + piece
+          : piece;
+        finalText = smartFormat(finalText);
       } else {
-        interim += res[0].transcript;
+        interimRaw += res[0].transcript;
       }
     }
 
-    const display = interim
-      ? finalText + (finalText ? " " : "") + interim
-      : finalText;
+    let display;
+    if (interimRaw) {
+      const combined = finalText
+        ? finalText + " " + interimRaw
+        : interimRaw;
+      display = smartFormat(combined);
+    } else {
+      display = finalText;
+    }
 
     textOutput.value = display;
     textOutput.scrollTop = textOutput.scrollHeight;
@@ -148,8 +208,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const useBtn = document.createElement("button");
       useBtn.textContent = "Send to pad";
       useBtn.addEventListener("click", () => {
+        // When user clicks "Send to pad", put this note into main textarea
         textOutput.value = note.text;
         finalText = note.text;
+
+        // Visual feedback on the pad
+        textOutput.classList.remove("pad-highlight");
+        // Force reflow so animation can replay
+        void textOutput.offsetWidth;
+        textOutput.classList.add("pad-highlight");
+        textOutput.focus();
       });
 
       const delBtn = document.createElement("button");
@@ -195,10 +263,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function startListening() {
     if (!recognition || isListening) return;
     try {
-      finalText = textOutput.value.trim(); // keep whatever is already there
+      // keep whatever is already in the pad and continue from there
+      finalText = smartFormat(textOutput.value.trim());
       recognition.start();
     } catch (e) {
-      // sometimes throws if called while already starting
       console.warn(e);
     }
   }

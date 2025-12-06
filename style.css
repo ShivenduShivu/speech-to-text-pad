@@ -1,3 +1,6 @@
+/* Import a nicer font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 /* ---------- base ---------- */
 *,
 *::before,
@@ -7,18 +10,18 @@
 
 :root {
   --bg-1: #050816;
-  --bg-2: #0b1220;
+  --bg-2: #020617;
   --accent: #22d3ee;
   --accent-soft: rgba(34, 211, 238, 0.15);
   --accent-strong: #38bdf8;
   --danger: #fb7185;
   --text-main: #e5e7eb;
   --text-muted: #9ca3af;
-  --card-bg: rgba(15, 23, 42, 0.92);
-  --card-border: rgba(148, 163, 184, 0.18);
-  --radius-lg: 18px;
+  --card-bg: rgba(15, 23, 42, 0.96);
+  --card-border: rgba(148, 163, 184, 0.26);
+  --radius-lg: 20px;
   --radius-md: 12px;
-  --shadow-xl: 0 18px 45px rgba(15, 23, 42, 0.9);
+  --shadow-xl: 0 22px 55px rgba(15, 23, 42, 0.95);
   --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.78);
 }
 
@@ -27,7 +30,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text-main);
 }
 
@@ -35,9 +38,10 @@ body {
 .background {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 10% 0, #1d4ed8 0, transparent 45%),
-              radial-gradient(circle at 90% 100%, #22c55e 0, transparent 55%),
-              linear-gradient(145deg, var(--bg-1), var(--bg-2));
+  background:
+    radial-gradient(circle at 10% 0, #1d4ed8 0, transparent 45%),
+    radial-gradient(circle at 90% 100%, #22c55e 0, transparent 55%),
+    linear-gradient(145deg, var(--bg-1), var(--bg-2));
   filter: saturate(1.2);
   z-index: -2;
 }
@@ -53,39 +57,39 @@ body {
 
 /* ---------- layout ---------- */
 .app {
-  max-width: 960px;
+  max-width: 1000px;
   margin: 32px auto 40px auto;
-  padding: 0 16px;
+  padding: 0 18px;
 }
 
 .app-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 18px;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: clamp(1.6rem, 2vw, 1.9rem);
-  letter-spacing: 0.03em;
+  font-size: clamp(1.7rem, 2.3vw, 2rem);
+  letter-spacing: 0.04em;
 }
 
 .subtitle {
-  margin: 6px 0 0 0;
+  margin: 8px 0 0 0;
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.93rem;
 }
 
 .badge {
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
   font-size: 0.78rem;
   color: var(--accent);
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8);
 }
 
 /* ---------- cards ---------- */
@@ -94,18 +98,21 @@ body {
   border-radius: var(--radius-lg);
   border: 1px solid var(--card-border);
   box-shadow: var(--shadow-xl);
-  padding: 16px 18px 16px;
-  margin-bottom: 14px;
+  padding: 18px 20px 16px;
   animation: cardIn 450ms ease-out;
 }
 
 .main-card {
-  margin-top: 6px;
+  margin-top: 4px;
+}
+
+.notes-card {
+  margin-top: 14px;
 }
 
 @keyframes cardIn {
   from {
-    transform: translateY(12px);
+    transform: translateY(14px);
     opacity: 0;
   }
   to {
@@ -120,19 +127,19 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .mic-wrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .mic-button {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  border-radius: 22px;
   border: none;
   cursor: pointer;
   position: relative;
@@ -140,8 +147,8 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-soft), 0 0 0 2px rgba(15, 23, 42, 0.9);
-  transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+  box-shadow: var(--shadow-soft), 0 0 0 2px rgba(15, 23, 42, 0.95);
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out, background 120ms ease-out;
 }
 
 .mic-button:hover {
@@ -154,7 +161,7 @@ body {
 }
 
 .mic-icon {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
 }
 
 .mic-button.listening {
@@ -166,33 +173,33 @@ body {
   position: absolute;
   inset: -6px;
   border-radius: inherit;
-  border: 2px solid rgba(248, 113, 113, 0.6);
+  border: 2px solid rgba(248, 113, 113, 0.7);
   animation: micPulse 900ms infinite ease-out;
 }
 
 @keyframes micPulse {
   0% {
     transform: scale(1);
-    opacity: 0.7;
+    opacity: 0.75;
   }
   100% {
-    transform: scale(1.18);
+    transform: scale(1.2);
     opacity: 0;
   }
 }
 
 .mic-indicator {
   font-size: 0.86rem;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(148, 163, 184, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.7);
 }
 
 .mic-on {
   color: #bbf7d0;
-  border-color: rgba(74, 222, 128, 0.7);
-  background: rgba(21, 128, 61, 0.25);
+  border-color: rgba(74, 222, 128, 0.9);
+  background: rgba(21, 128, 61, 0.3);
 }
 
 .mic-off {
@@ -209,7 +216,7 @@ body {
 /* ---------- buttons ---------- */
 .btn {
   border-radius: var(--radius-md);
-  padding: 7px 14px;
+  padding: 7px 15px;
   border: none;
   font-size: 0.9rem;
   cursor: pointer;
@@ -224,24 +231,24 @@ body {
 .btn.primary {
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   color: #020617;
-  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.55);
+  box-shadow: 0 10px 26px rgba(56, 189, 248, 0.6);
 }
 
 .btn.primary:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 14px 35px rgba(56, 189, 248, 0.7);
+  box-shadow: 0 14px 32px rgba(56, 189, 248, 0.75);
 }
 
 .btn.secondary {
   background: var(--accent-soft);
   color: var(--accent-strong);
-  border: 1px solid rgba(34, 211, 238, 0.4);
+  border: 1px solid rgba(34, 211, 238, 0.5);
 }
 
 .btn.ghost {
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.92);
   color: var(--text-main);
-  border: 1px solid rgba(148, 163, 184, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.6);
 }
 
 .btn.small {
@@ -271,24 +278,41 @@ body {
 
 #textOutput {
   width: 100%;
-  border-radius: 14px;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  padding: 11px 13px;
   resize: vertical;
   min-height: 130px;
-  background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.03), transparent 55%),
-              rgba(15, 23, 42, 0.98);
+  background:
+    radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.06), transparent 55%),
+    rgba(15, 23, 42, 0.98);
   color: var(--text-main);
-  font-size: 0.95rem;
-  line-height: 1.4;
-  box-shadow: inset 0 1px 0 rgba(15, 23, 42, 0.9);
+  font-size: 0.96rem;
+  line-height: 1.5;
+  box-shadow: inset 0 1px 0 rgba(15, 23, 42, 0.95);
   outline: none;
   transition: border 120ms ease-out, box-shadow 120ms ease-out;
 }
 
 #textOutput:focus {
-  border-color: rgba(56, 189, 248, 0.8);
-  box-shadow: 0 0 0 1px rgba(8, 47, 73, 0.9);
+  border-color: rgba(56, 189, 248, 0.85);
+  box-shadow: 0 0 0 1px rgba(8, 47, 73, 0.95);
+}
+
+/* highlight animation when “Send to pad” is used */
+.pad-highlight {
+  animation: padGlow 900ms ease-out;
+}
+
+@keyframes padGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.6);
+    border-color: rgba(56, 189, 248, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgba(34, 211, 238, 0);
+    border-color: rgba(148, 163, 184, 0.6);
+  }
 }
 
 /* ---------- footer row ---------- */
@@ -346,19 +370,20 @@ body {
 }
 
 .note-item {
-  background: radial-gradient(circle at 0 0, rgba(34, 211, 238, 0.06), transparent 65%),
-              rgba(15, 23, 42, 0.98);
-  border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.45);
-  padding: 8px 10px;
+  background:
+    radial-gradient(circle at 0 0, rgba(34, 211, 238, 0.08), transparent 65%),
+    rgba(15, 23, 42, 0.98);
+  border-radius: 13px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  padding: 8px 11px;
   font-size: 0.9rem;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.8);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.9);
   animation: notePop 320ms ease-out;
 }
 
 @keyframes notePop {
   from {
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(10px) scale(0.98);
     opacity: 0;
   }
   to {
@@ -397,16 +422,16 @@ body {
 
 /* ---------- footer ---------- */
 .app-footer {
-  margin-top: 10px;
+  margin-top: 12px;
   text-align: center;
   color: var(--text-muted);
   font-size: 0.85rem;
 }
 
 /* ---------- responsive ---------- */
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .app {
-    margin-top: 18px;
+    margin-top: 20px;
   }
 
   .status-row {
