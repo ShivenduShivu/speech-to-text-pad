@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Speech-to-Text Pad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background"></div>
+
+  <main class="app">
+    <header class="app-header">
+      <div>
+        <h1>Speech-to-Text Pad</h1>
+        <p class="subtitle">Click the mic, start talking, save your thoughts as notes.</p>
+      </div>
+      <span class="badge" id="supportBadge">Checking browser support…</span>
+    </header>
+
+    <section class="card main-card">
+      <div class="status-row">
+        <div class="mic-wrapper">
+          <button id="micButton" class="mic-button" aria-label="Toggle microphone">
+            <span class="mic-icon">🎙️</span>
+          </button>
+          <span id="micIndicator" class="mic-indicator mic-off">Idle</span>
+        </div>
+
+        <div class="controls">
+          <button id="startBtn" class="btn primary">Start Listening</button>
+          <button id="stopBtn" class="btn ghost" disabled>Stop</button>
+          <button id="clearBtn" class="btn ghost small">Clear Text</button>
+        </div>
+      </div>
+
+      <label for="textOutput" class="textarea-label">
+        Live Transcript
+        <span id="hintLabel" class="hint">Tip: speak clearly near the mic.</span>
+      </label>
+      <textarea
+        id="textOutput"
+        rows="8"
+        placeholder="Your words will appear here in real-time..."
+      ></textarea>
+
+      <div class="footer-row">
+        <button id="saveNoteBtn" class="btn secondary">Save as note</button>
+        <small id="errorArea" class="error-text" aria-live="polite"></small>
+      </div>
+    </section>
+
+    <section class="card notes-card">
+      <div class="notes-header">
+        <h2>Saved Notes</h2>
+        <span class="note-count" id="noteCount">0 notes</span>
+      </div>
+      <div id="notesList" class="notes-list empty">
+        <p class="empty-text">No notes yet. Speak something and hit “Save as note”.</p>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Built with the <strong>SpeechRecognition</strong> Web API. Best viewed in Chrome / Edge.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
