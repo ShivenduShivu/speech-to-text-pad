@@ -9,6 +9,11 @@
 
 > ⭐ *Because typing is sooo 2020 — speak your notes like a legend!* 🎙️✨
 
+### 🔗 Live Demo  
+**👉 [Click here to try Speech-to-Text Pad](https://shivendushivu.github.io/speech-to-text-pad/)**  
+
+
+
 # 🎙️ Speech-to-Text Pad — Because Typing Is Overrated
 
 Welcome to **Speech-to-Text Pad**, a clean, animated, voice-powered note-taking tool built with pure  
