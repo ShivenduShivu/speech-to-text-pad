@@ -14,7 +14,7 @@
 
 
 
-# 🎙️ Speech-to-Text Pad — Because Typing Is Overrated
+# 🎙️ Speech-to-Text Pad — Because Typing Is Overrated And we are in 2025 Come On
 
 Welcome to **Speech-to-Text Pad**, a clean, animated, voice-powered note-taking tool built with pure  
 **HTML + CSS + JavaScript** and the magical **Web Speech API**.  
