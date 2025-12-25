@@ -36,4 +36,4 @@ Let your voice do the work. Your browser will handle the grammar... mostly. 😅
 
 ---
 
-Enjoy! If this project made you feel powerful 💪, unstoppable 🚀, or mildly productive — ⭐ the repo!
+Enjoy! If this project made you feel **powerful** 💪, **unstoppable** 🚀, or **mildly productive** — ⭐ the repo!
